@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="vi" data-theme="mounting-light">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chọn Mounting Trial nhẹ nhất trong Mirror of Sisyphe."><meta name="theme-color" content="#101114">
+  <title>Mounting Trial Picker</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23e65c50'/%3E%3Cpath d='M18 18h28v8H34v20h-8V26h-8z' fill='white'/%3E%3C/svg%3E">
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body class="h-screen overflow-hidden text-base-content flex flex-col">
+  <header class="topbar flex-none">
+    <div class="navbar wrap min-h-10 py-0.5 px-0 flex justify-between">
+      <div class="flex items-center gap-2.5">
+        <a class="flex items-center gap-2 font-bold" href="#top">
+          <span class="logo-mark grid size-6 place-items-center rounded-md bg-primary text-[0.6rem] font-black text-primary-content">T</span>
+          <span class="text-sm tracking-tight font-extrabold">Mounting Trial</span>
+        </a>
+        <span class="badge badge-primary badge-soft text-[0.6rem] font-bold uppercase tracking-wider hidden sm:inline-flex">Mirror Of Sisyphe</span>
+        <span class="badge badge-ghost text-[0.62rem] font-semibold hidden lg:inline-flex border border-base-300">3 Offense Level ≈ 1 Clash</span>
+      </div>
+      <nav class="flex items-center gap-2" aria-label="Điều hướng chính">
+        <button id="openSourcesBtn" type="button" class="btn btn-ghost btn-xs font-semibold">Nguồn ↗</button>
+        <label class="swap swap-rotate btn btn-ghost btn-circle btn-xs" aria-label="Đổi giao diện sáng hoặc tối">
+          <input id="themeToggle" type="checkbox" value="mounting-dark" class="theme-controller">
+          <svg class="swap-off size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
+          <svg class="swap-on size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path></svg>
+        </label>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="app-main flex-1 min-h-0 wrap flex flex-col py-1.5 gap-2 overflow-hidden">
+    <!-- Tactical Control Strip -->
+    <div class="controls-strip flex-none flex flex-wrap items-center justify-between gap-1.5 p-1.5 bg-base-200/90 rounded-lg border border-base-300">
+      <!-- Roman Floor Rail -->
+      <div class="floor-rail flex items-center gap-1 overflow-x-auto no-scrollbar flex-1 min-w-0">
+        <span class="text-[0.6rem] font-black uppercase tracking-wider text-primary mr-1 shrink-0 flex items-center gap-1">
+          <span class="size-1.5 rounded-full bg-primary animate-pulse"></span>
+          TẦNG
+        </span>
+        <button type="button" data-floor="1" class="roman-floor-btn active" title="Tầng I">I</button>
+        <button type="button" data-floor="2" class="roman-floor-btn" title="Tầng II">II</button>
+        <button type="button" data-floor="3" class="roman-floor-btn" title="Tầng III">III</button>
+        <button type="button" data-floor="4" class="roman-floor-btn" title="Tầng IV">IV</button>
+        <button type="button" data-floor="5" class="roman-floor-btn" title="Tầng V">V</button>
+        <button type="button" data-floor="6" class="roman-floor-btn" title="Tầng VI">VI</button>
+        <button type="button" data-floor="7" class="roman-floor-btn" title="Tầng VII">VII</button>
+        <button type="button" data-floor="8" class="roman-floor-btn" title="Tầng VIII">VIII</button>
+        <button type="button" data-floor="9" class="roman-floor-btn" title="Tầng IX">IX</button>
+        <button type="button" data-floor="10" class="roman-floor-btn" title="Tầng X">X</button>
+        <button type="button" data-floor="11" class="roman-floor-btn" title="Tầng XI">XI</button>
+        <button type="button" data-floor="12" class="roman-floor-btn" title="Tầng XII">XII</button>
+        <button type="button" data-floor="13" class="roman-floor-btn" title="Tầng XIII">XIII</button>
+        <button type="button" data-floor="14" class="roman-floor-btn" title="Tầng XIV">XIV</button>
+        <button type="button" data-floor="all" class="roman-floor-btn px-2 whitespace-nowrap" title="Tất Cả Tầng">ALL</button>
+      </div>
+
+      <!-- Quick Action Group -->
+      <div class="flex items-center gap-1.5 shrink-0">
+        <label class="input input-xs bg-base-100 border border-base-300 flex items-center gap-1 w-32 sm:w-36 rounded-md">
+          <svg class="size-3 opacity-40 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+          <input id="search" type="search" placeholder="Tìm kiếm..." autocomplete="off" class="w-full text-xs">
+        </label>
+        <select id="mode" class="select select-xs bg-base-100 border border-base-300 font-bold rounded-md">
+          <option value="safe" selected>An Toàn</option>
+          <option value="fast">Farm Nhanh</option>
+        </select>
+        <label class="flex items-center gap-1 text-[0.62rem] font-bold text-base-content/50">
+          <span>Lấy</span>
+          <select id="pickCount" class="select select-xs bg-base-100 border border-base-300 font-bold rounded-md w-12">
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+          </select>
+        </label>
+        <button id="openCustomModal" type="button" class="btn btn-xs btn-outline btn-primary px-2 gap-1 rounded-md font-bold whitespace-nowrap">
+          <svg class="size-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+          <span>Tạo</span>
+        </button>
+        <button id="clear" type="button" class="btn btn-xs btn-ghost text-error/80 hover:text-error px-2 rounded-md font-bold whitespace-nowrap">
+          Xóa
+        </button>
+      </div>
+    </div>
+
+    <!-- The Comparison Arena (Stage) -->
+    <section class="arena-section flex-1 min-h-0 flex flex-col rounded-lg border border-base-300 bg-base-100/70 p-2 overflow-hidden shadow-xs relative">
+      <!-- Arena Header -->
+      <div class="arena-header flex items-center justify-between pb-1.5 mb-1.5 border-b border-base-300/80 flex-none">
+        <div class="flex items-center gap-2">
+          <span class="badge badge-primary size-5 p-0 text-[0.6rem] font-black">VS</span>
+          <h2 class="text-xs font-black uppercase tracking-wider">Đấu Trường Đối Chiếu Trial</h2>
+          <span id="selectedCountBadge" class="badge badge-xs badge-ghost font-bold text-[0.6rem] border border-base-300">0 Slotted</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="modeDisplayBadge" class="badge badge-xs badge-soft badge-primary font-bold text-[0.6rem]">Chế Độ: An Toàn</span>
+          <span class="text-[0.6rem] text-base-content/40 hidden md:inline font-medium">Bấm vào thẻ bài để bỏ chọn</span>
+        </div>
+      </div>
+
+      <!-- Interactive Comparison Content Container -->
+      <div id="arenaContainer" class="arena-container flex-1 min-h-0 overflow-y-auto"></div>
+    </section>
+
+    <!-- The Trial Armory (Selection Pool) -->
+    <section class="armory-section flex-none flex flex-col rounded-lg border border-base-300 bg-base-200/50 p-2">
+      <div class="flex items-center justify-between px-0.5 mb-1 flex-none">
+        <div class="flex items-center gap-2">
+          <span class="text-[0.65rem] font-black uppercase tracking-wider text-base-content/60 flex items-center gap-1">
+            <svg class="size-3 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16M4 12h16m-7 6h7"/></svg>
+            Kho Trial Khả Dụng
+          </span>
+          <span id="libraryCount" class="badge badge-xs badge-ghost text-[0.6rem] font-bold border border-base-300"></span>
+        </div>
+        <span class="text-[0.6rem] text-base-content/40 font-medium hidden sm:inline">Click thẻ để đưa vào sàn đối chiếu • Rê chuột quét chỉ số chi tiết</span>
+      </div>
+      <div id="libraryGrid" class="armory-grid"></div>
+    </section>
+  </main>
+
+  <dialog id="sourcesModal" class="modal">
+    <div class="modal-box max-w-lg border border-base-300 bg-base-100 p-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-base-300 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="badge badge-primary size-6 p-0 font-bold">i</span>
+          <h3 class="font-bold text-sm">Nguồn Dữ Liệu & Quy Tắc</h3>
+        </div>
+        <form method="dialog"><button class="btn btn-ghost btn-circle btn-xs">✕</button></form>
+      </div>
+      <div class="mt-3 space-y-3 text-xs leading-5">
+        <div class="grid gap-2 sm:grid-cols-2">
+          <a class="card card-border bg-base-200 p-3 hover:bg-base-300 transition-colors" href="https://limbuscompany.wiki.gg/wiki/Mirror_of_Sisyphe" target="_blank" rel="noreferrer">
+            <strong class="font-bold text-base-content">Mirror Of Sisyphe ↗</strong>
+            <p class="text-base-content/60 text-[0.7rem]">Danh sách Mounting Trial theo tầng (1 - 14)</p>
+          </a>
+          <a class="card card-border bg-base-200 p-3 hover:bg-base-300 transition-colors" href="https://limbuscompany.wiki.gg/wiki/Battles" target="_blank" rel="noreferrer">
+            <strong class="font-bold text-base-content">Battles ↗</strong>
+            <p class="text-base-content/60 text-[0.7rem]">Offense Level, Defense Level và Clash</p>
+          </a>
+          <a class="card card-border bg-base-200 p-3 hover:bg-base-300 transition-colors" href="https://limbuscompany.wiki.gg/wiki/Damage" target="_blank" rel="noreferrer">
+            <strong class="font-bold text-base-content">Damage ↗</strong>
+            <p class="text-base-content/60 text-[0.7rem]">Công thức tính Damage</p>
+          </a>
+          <a class="card card-border bg-base-200 p-3 hover:bg-base-300 transition-colors" href="https://limbuscompany.wiki.gg/wiki/Category:MD_Mounting_Trial_Icons" target="_blank" rel="noreferrer">
+            <strong class="font-bold text-base-content">Mounting Trial Icons ↗</strong>
+            <p class="text-base-content/60 text-[0.7rem]">Icon Trial gốc từ Wiki</p>
+          </a>
+        </div>
+        <div class="rounded-box border border-base-300 bg-base-200/50 p-2.5 text-base-content/60 text-[0.7rem]">
+          Quy đổi ước tính: <strong>3 Offense Level ≈ 1 Clash Power</strong>. Pool Mounting Trial có từ Tầng 1 đến 14 (Tầng 15 kết thúc run). Nguồn ghi trùng tên Keen XIV ở Tầng 12; app thêm "Resilient" để phân biệt hai bộ chỉ số. Dữ liệu được kiểm tra ngày 17/10/2026.
+        </div>
+      </div>
+      <div class="modal-action mt-3">
+        <form method="dialog"><button class="btn btn-sm btn-ghost">Đóng</button></form>
+      </div>
+    </div>
+    <form method="dialog" class="modal-backdrop"><button>close</button></form>
+  </dialog>
+
+  <div id="trialPopover" class="trial-popover" hidden>
+    <div class="popover-header">
+      <img id="popoverIcon" src="" alt="" class="size-7 object-contain" />
+      <div class="min-w-0 flex-1">
+        <strong id="popoverTitle" class="block truncate text-xs font-extrabold text-base-content"></strong>
+        <div class="flex items-center gap-1.5 mt-0.5">
+          <span id="popoverFloor" class="badge badge-ghost badge-xs font-bold text-[0.6rem]"></span>
+          <span id="popoverScore" class="text-[0.68rem] font-bold text-primary"></span>
+        </div>
+      </div>
+    </div>
+    <div id="popoverEffects" class="popover-effects mt-2 space-y-1.5"></div>
+  </div>
+
+  <dialog id="customModal" class="modal">
+    <div class="modal-box max-w-lg border border-base-300 bg-base-100 p-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-base-300 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="badge badge-primary size-6 p-0 font-bold">+</span>
+          <h3 class="font-bold text-sm">Tạo Mounting Trial Tùy Chỉnh</h3>
+        </div>
+        <form method="dialog"><button class="btn btn-ghost btn-circle btn-xs">✕</button></form>
+      </div>
+      <form id="customForm" class="mt-4 space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          <label class="form-control sm:col-span-1">
+            <span class="mb-1 text-xs font-bold text-base-content/65">Tên Trial</span>
+            <input id="customName" type="text" class="input input-sm bg-base-200" placeholder="Ví dụ: My Trial" required />
+          </label>
+          <label class="form-control">
+            <span class="mb-1 text-xs font-bold text-base-content/65">Tầng</span>
+            <select id="customFloor" class="select select-sm bg-base-200">
+              <option value="1">Tầng 1</option><option value="2">Tầng 2</option><option value="3">Tầng 3</option>
+              <option value="4">Tầng 4</option><option value="5">Tầng 5</option><option value="6">Tầng 6</option>
+              <option value="7">Tầng 7</option><option value="8">Tầng 8</option><option value="9">Tầng 9</option>
+              <option value="10">Tầng 10</option><option value="11" selected>Tầng 11</option><option value="12">Tầng 12</option>
+              <option value="13">Tầng 13</option><option value="14">Tầng 14</option>
+            </select>
+          </label>
+          <label class="form-control">
+            <span class="mb-1 text-xs font-bold text-base-content/65">Biểu Tượng</span>
+            <select id="customIcon" class="select select-sm bg-base-200">
+              <option value="Clash Power">Clash</option>
+              <option value="Offense Level">Offense</option>
+              <option value="Defense Level">Defense</option>
+              <option value="Growth">HP (Growth)</option>
+              <option value="Brutality">Brutality</option>
+              <option value="Final Power">Final Power</option>
+              <option value="Base Power">Base Power</option>
+              <option value="Headstrong">Headstrong</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <div class="mb-1.5 flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-base-content/50">Chọn & Nhập Chỉ Số</span>
+            <span class="text-[0.68rem] text-base-content/40">Để trống nếu không có</span>
+          </div>
+          <div id="customStatInputs" class="grid grid-cols-2 gap-2 max-h-52 overflow-y-auto p-2 rounded-box border border-base-300 bg-base-200/40"></div>
+        </div>
+        <div class="rounded-box border border-base-300 bg-base-200/60 p-3">
+          <div class="flex items-center justify-between text-xs font-bold">
+            <span class="text-base-content/60">Điểm Ước Tính (An Toàn)</span>
+            <span id="customScorePreview" class="text-primary font-black">0.0 điểm</span>
+          </div>
+        </div>
+        <div class="modal-action mt-3 flex justify-end gap-2">
+          <form method="dialog"><button class="btn btn-ghost btn-sm" type="button" id="cancelCustom">Hủy</button></form>
+          <button type="submit" class="btn btn-primary btn-sm">Thêm Trial</button>
+        </div>
+      </form>
+    </div>
+    <form method="dialog" class="modal-backdrop"><button>close</button></form>
+  </dialog>
+</body>
+</html>

@@ -1,0 +1,496 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss" source(none);
+@source "../index.html";
+@source "./main.js";
+@plugin "daisyui" { themes: mounting-light --default, mounting-dark; logs: false; }
+@plugin "daisyui/theme" {
+  name: "mounting-light"; default: true; prefersdark: false; color-scheme: light;
+  --color-base-100: #fffaf5; --color-base-200: #f8f0e8; --color-base-300: #eadfd4; --color-base-content: #282321;
+  --color-primary: #d94f45; --color-primary-content: #ffffff; --color-secondary: #7659b8; --color-secondary-content: #ffffff;
+  --color-accent: #bd7b21; --color-accent-content: #ffffff; --color-neutral: #393332; --color-neutral-content: #fffaf5;
+  --color-info: #3683a9; --color-info-content: #ffffff; --color-success: #3f8d58; --color-success-content: #ffffff;
+  --color-warning: #b87319; --color-warning-content: #ffffff; --color-error: #cc443b; --color-error-content: #ffffff;
+  --radius-selector: .4rem; --radius-field: .5rem; --radius-box: .75rem; --size-selector: .25rem; --size-field: .25rem;
+  --border: 1px; --depth: 0; --noise: 0;
+}
+@plugin "daisyui/theme" {
+  name: "mounting-dark"; default: false; prefersdark: false; color-scheme: dark;
+  --color-base-100: #101114; --color-base-200: #17181d; --color-base-300: #24262d; --color-base-content: #f2efea;
+  --color-primary: #e65c50; --color-primary-content: #ffffff; --color-secondary: #a78bfa; --color-secondary-content: #130f22;
+  --color-accent: #e8b85b; --color-accent-content: #191204; --color-neutral: #2b2d34; --color-neutral-content: #e8e6e2;
+  --color-info: #67b7dc; --color-info-content: #07161c; --color-success: #74c98d; --color-success-content: #07140b;
+  --color-warning: #e8b85b; --color-warning-content: #191204; --color-error: #ef6a60; --color-error-content: #1b0605;
+  --radius-selector: .4rem; --radius-field: .5rem; --radius-box: .75rem; --size-selector: .25rem; --size-field: .25rem;
+  --border: 1px; --depth: 0; --noise: 0;
+}
+:root { font-family: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif; font-synthesis: none; }
+html { scroll-behavior: smooth; }
+body {
+  min-width: 320px;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(circle at 50% -16%, color-mix(in oklab, var(--color-primary) 12%, var(--color-base-100)) 0, var(--color-base-100) 34rem);
+}
+.wrap { width: min(1360px, calc(100% - 24px)); margin-inline: auto; }
+.topbar { border-bottom: 1px solid color-mix(in oklab, var(--color-base-content) 8%, transparent); background: color-mix(in oklab, var(--color-base-100) 88%, transparent); backdrop-filter: blur(18px); }
+.logo-mark { box-shadow: 0 4px 14px color-mix(in oklab, var(--color-primary) 30%, transparent); }
+
+/* Roman Floor Rail */
+.floor-rail::-webkit-scrollbar { display: none; }
+.floor-rail { -ms-overflow-style: none; scrollbar-width: none; }
+.roman-floor-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.55rem;
+  min-width: 1.65rem;
+  padding: 0 .4rem;
+  border-radius: 4px;
+  border: 1px solid var(--color-base-300);
+  background: var(--color-base-100);
+  color: var(--color-base-content);
+  font-size: .68rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  transition: all .12s ease;
+  letter-spacing: .02em;
+}
+.roman-floor-btn:hover {
+  background: var(--color-base-300);
+  border-color: color-mix(in oklab, var(--color-base-content) 25%, transparent);
+}
+.roman-floor-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-primary-content);
+  box-shadow: 0 0 10px color-mix(in oklab, var(--color-primary) 50%, transparent);
+}
+
+/* Arena Stage (Comparison Duel) */
+.arena-section {
+  display: flex;
+  flex-direction: column;
+}
+.arena-container {
+  display: flex;
+  flex-direction: column;
+  padding-right: .2rem;
+}
+
+/* Empty Hologram Slots */
+.arena-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: 100%;
+  min-height: 200px;
+  padding: 1rem;
+}
+.hologram-slots-row {
+  display: flex;
+  gap: .75rem;
+  width: 100%;
+  max-width: 680px;
+  justify-content: center;
+}
+.hologram-pedestal {
+  flex: 1 1 0;
+  max-width: 210px;
+  height: 140px;
+  border: 1.5px dashed color-mix(in oklab, var(--color-base-content) 25%, transparent);
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--color-base-200) 40%, transparent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  transition: all .2s ease;
+}
+.hologram-pedestal:hover {
+  border-color: var(--color-primary);
+  background: color-mix(in oklab, var(--color-primary) 5%, transparent);
+}
+.hologram-label {
+  font-size: .65rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  color: color-mix(in oklab, var(--color-base-content) 45%, transparent);
+  text-transform: uppercase;
+}
+
+/* Arena Verdict Banner */
+.arena-verdict-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .5rem .75rem;
+  border-radius: 6px;
+  border: 1px solid color-mix(in oklab, var(--color-success) 40%, transparent);
+  background: color-mix(in oklab, var(--color-success) 10%, var(--color-base-100));
+  margin-bottom: .6rem;
+  flex-shrink: 0;
+}
+
+/* Arena Duel Grid */
+.arena-duel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: .65rem;
+  align-items: stretch;
+}
+
+/* Candidate Duel Card */
+.duel-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background: var(--color-base-100);
+  border: 1.5px solid var(--color-base-300);
+  padding: .65rem .75rem;
+  cursor: pointer;
+  position: relative;
+  transition: all .15s ease;
+  user-select: none;
+}
+.duel-card:hover {
+  transform: translateY(-2px);
+}
+.duel-card.winner {
+  border-color: var(--color-success);
+  box-shadow: 0 4px 18px color-mix(in oklab, var(--color-success) 22%, transparent);
+  background: color-mix(in oklab, var(--color-success) 5%, var(--color-base-100));
+}
+.duel-card.avoid {
+  border-color: color-mix(in oklab, var(--color-error) 70%, var(--color-base-300));
+  background: color-mix(in oklab, var(--color-error) 4%, var(--color-base-100));
+}
+.duel-card-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: .62rem;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding-bottom: .4rem;
+  border-bottom: 1px solid var(--color-base-300);
+  margin-bottom: .45rem;
+}
+.duel-card.winner .duel-card-badge { color: var(--color-success); }
+.duel-card.avoid .duel-card-badge { color: var(--color-error); }
+
+.duel-card-main {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: .45rem;
+}
+.duel-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px color-mix(in oklab, var(--color-base-content) 15%, transparent));
+}
+.duel-title-box {
+  min-width: 0;
+  flex: 1 1 0;
+}
+.duel-name {
+  font-size: .8rem;
+  font-weight: 800;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.duel-floor {
+  font-size: .55rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+/* Hazard / Clash Meter Bar */
+.threat-meter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .25rem .45rem;
+  border-radius: 4px;
+  font-size: .62rem;
+  font-weight: 800;
+  margin-bottom: .45rem;
+}
+.threat-meter.safe {
+  background: color-mix(in oklab, var(--color-success) 15%, transparent);
+  color: var(--color-success);
+}
+.threat-meter.danger {
+  background: color-mix(in oklab, var(--color-error) 15%, transparent);
+  color: var(--color-error);
+}
+
+.duel-math-box {
+  margin-top: .4rem;
+  padding: .35rem .5rem;
+  border-radius: 4px;
+  background: color-mix(in oklab, var(--color-base-content) 4%, transparent);
+  border: 1px solid var(--color-base-300);
+}
+.duel-math-title {
+  font-size: .56rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: color-mix(in oklab, var(--color-base-content) 55%, transparent);
+  margin-bottom: .2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.duel-math-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .62rem;
+  padding: .06rem 0;
+}
+.duel-math-formula {
+  color: color-mix(in oklab, var(--color-base-content) 75%, transparent);
+}
+.duel-math-val {
+  font-weight: 800;
+}
+.duel-card.winner .duel-math-val { color: var(--color-success); }
+.duel-card.avoid .duel-math-val { color: var(--color-error); }
+
+.duel-rationale {
+  font-size: .68rem;
+  line-height: 1.45;
+  color: color-mix(in oklab, var(--color-base-content) 85%, transparent);
+  margin-top: .45rem;
+  padding-top: .45rem;
+  border-top: 1px dashed var(--color-base-300);
+}
+.duel-rationale strong {
+  color: var(--color-base-content);
+  font-weight: 800;
+}
+.duel-remove-hint {
+  font-size: .52rem;
+  color: color-mix(in oklab, var(--color-base-content) 35%, transparent);
+  text-align: right;
+  margin-top: .3rem;
+}
+.duel-card:hover .duel-remove-hint {
+  color: var(--color-error);
+  font-weight: 700;
+}
+
+/* Armory Section (Bottom Shelf) */
+.armory-section {
+  flex-shrink: 0;
+}
+.armory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: .35rem;
+  max-height: 180px;
+  overflow-y: auto;
+  padding: .25rem .15rem;
+}
+
+/* Armory Tile */
+.armory-tile {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  height: 2.2rem;
+  padding: 0 .5rem 0 .35rem;
+  border: 1px solid var(--color-base-300);
+  border-radius: 6px;
+  background: var(--color-base-100);
+  cursor: pointer;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--color-base-content);
+  transition: all .12s ease;
+  user-select: none;
+  min-width: 0;
+  position: relative;
+}
+.armory-tile:hover {
+  background: var(--color-base-200);
+  border-color: color-mix(in oklab, var(--color-base-content) 30%, transparent);
+  transform: translateY(-1px);
+}
+.armory-tile.selected {
+  background: color-mix(in oklab, var(--color-primary) 12%, var(--color-base-100));
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary), 0 2px 6px color-mix(in oklab, var(--color-primary) 20%, transparent);
+}
+.armory-tile .tile-icon {
+  width: 1.35rem;
+  height: 1.35rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 2px color-mix(in oklab, var(--color-base-content) 12%, transparent));
+}
+.armory-tile .tile-name {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  line-height: 1.2;
+}
+.armory-tile .tile-floor {
+  font-size: .55rem;
+  font-weight: 800;
+  color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+  flex-shrink: 0;
+}
+.armory-tile.selected .tile-floor {
+  display: none;
+}
+.armory-tile .tile-check {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: .95rem;
+  height: .95rem;
+  border-radius: 4px;
+  background: var(--color-primary);
+  color: var(--color-primary-content);
+  font-size: .55rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.armory-tile.selected .tile-check {
+  display: flex;
+}
+.armory-tile .tile-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: .95rem;
+  height: .95rem;
+  border-radius: 4px;
+  color: var(--color-error);
+  font-size: .55rem;
+  font-weight: 900;
+  flex-shrink: 0;
+  margin-left: -.1rem;
+}
+.armory-tile .tile-delete:hover {
+  background: color-mix(in oklab, var(--color-error) 20%, transparent);
+}
+
+/* Floating Hover Popover */
+.trial-popover {
+  position: fixed;
+  z-index: 9999;
+  width: 270px;
+  max-width: calc(100vw - 24px);
+  padding: .7rem .8rem;
+  background: var(--color-base-100);
+  border: 1px solid var(--color-base-300);
+  border-radius: 8px;
+  box-shadow: 0 14px 36px color-mix(in oklab, var(--color-base-content) 18%, transparent), 0 2px 8px color-mix(in oklab, var(--color-base-content) 10%, transparent);
+  pointer-events: none;
+  animation: popoverIn .12s ease both;
+}
+@keyframes popoverIn { from { opacity: 0; transform: translateY(3px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.popover-header { display: flex; align-items: center; gap: .6rem; padding-bottom: .45rem; border-bottom: 1px solid var(--color-base-300); }
+.popover-effects { display: grid; gap: .3rem; margin-top: .45rem; }
+.popover-item { display: flex; align-items: center; justify-content: space-between; gap: .75rem; font-size: .7rem; }
+.popover-label { color: color-mix(in oklab, var(--color-base-content) 80%, transparent); font-weight: 600; font-size: .68rem; }
+
+/* Effect Chips */
+.effect-chips { display: flex; flex-wrap: wrap; gap: .2rem; min-width: 0; }
+.trial-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .2rem;
+  height: auto;
+  min-height: 1rem;
+  max-width: 100%;
+  padding: .06rem .28rem;
+  border-radius: .2rem;
+  border: 1px solid var(--color-base-300);
+  font-size: .52rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.trial-chip .chip-name { opacity: .85; }
+.trial-chip .chip-val { font-weight: 700; }
+.trial-chip-threat { background: color-mix(in oklab, var(--color-error) 12%, var(--color-base-100)); border-color: color-mix(in oklab, var(--color-error) 35%, transparent); color: color-mix(in oklab, var(--color-error) 90%, var(--color-base-content)); }
+.trial-chip-offense { background: color-mix(in oklab, var(--color-warning) 12%, var(--color-base-100)); border-color: color-mix(in oklab, var(--color-warning) 35%, transparent); color: color-mix(in oklab, var(--color-warning) 90%, var(--color-base-content)); }
+.trial-chip-defense { background: color-mix(in oklab, var(--color-base-300) 45%, var(--color-base-100)); border-color: var(--color-base-300); color: color-mix(in oklab, var(--color-base-content) 80%, transparent); }
+
+/* Custom Scrollbars */
+.arena-container::-webkit-scrollbar,
+.armory-grid::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.arena-container::-webkit-scrollbar-track,
+.armory-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+.arena-container::-webkit-scrollbar-thumb,
+.armory-grid::-webkit-scrollbar-thumb {
+  background: var(--color-base-300);
+  border-radius: 999px;
+}
+.arena-container::-webkit-scrollbar-thumb:hover,
+.armory-grid::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklab, var(--color-base-content) 30%, transparent);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px), (max-height: 620px) {
+  body {
+    height: auto;
+    min-height: 100dvh;
+    overflow-y: auto;
+  }
+  .app-main {
+    overflow-y: auto;
+  }
+  .arena-section {
+    min-height: 280px;
+  }
+  .armory-grid {
+    max-height: 220px;
+  }
+}
+
+@media (max-width: 640px) {
+  .controls-strip {
+    gap: .5rem;
+  }
+  .floor-bar {
+    width: 100%;
+  }
+  .breakdown { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
